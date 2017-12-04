@@ -1,8 +1,3 @@
-#define _CRT_SECURE_NO_WARNINGS
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <time.h>
 
 #define TRUE	1
 #define FALSE	0
@@ -36,11 +31,11 @@ struct resultados {
 
 struct jogador {
 	char nome[30]; //nome do jogador
-	int def; //pontuação  do jogador como defesa
-	int med; //pontuação do jogador como médio
-	int atac; //pontuação do jogador como atacante
-	int gr; //pontuação do jogador como guarda-redes
-	int pos; //posição a definir para o jogador
+	int def; //pontuaÃ§Ã£o  do jogador como defesa
+	int med; //pontuaÃ§Ã£o do jogador como mÃ©dio
+	int atac; //pontuaÃ§Ã£o do jogador como atacante
+	int gr; //pontuaÃ§Ã£o do jogador como guarda-redes
+	int pos; //posiÃ§Ã£o a definir para o jogador
 };
 
 typedef struct node {
@@ -53,9 +48,9 @@ typedef struct lista {
 } list_t;
 
 struct formacao {
-	int numdef; //número de defesas
-	int nummed; //número de médios
-	int numatac; //número de atacantes
+	int numdef; //nÃºmero de defesas
+	int nummed; //nÃºmero de mÃ©dios
+	int numatac; //nÃºmero de atacantes
 };
 
 struct equipa {
@@ -75,7 +70,7 @@ typedef struct lista_equs {
 	node_eqs *head;
 } list_eqs;
 
-//Funções de manipulação da lista ligada------------------------------------------------------------------
+//FunÃ§Ãµes de manipulaÃ§Ã£o da lista ligada------------------------------------------------------------------
 node_t * createNode() {
 	node_t *node = NULL;
 	node = (node_t *)malloc(sizeof(node_t));
@@ -185,7 +180,7 @@ void insertListTop_jogos(lista_jogos *list, node_jogos *node) {
 }
 
 //------------------------------------------------------------------------
-//Funções de Recolha e mudança de jogadores
+//FunÃ§Ãµes de Recolha e mudanÃ§a de jogadores
 
 //Core Recolha dos dados dos ficheiros
 list_t* recolher_dados_jogadores(char *nome_equipa)
@@ -209,7 +204,7 @@ list_t* recolher_dados_jogadores(char *nome_equipa)
 	}
 
 	while (fgets(c, sizeof(c), fptr)) {
-		/*Cria um nó e insere os dados*/
+		/*Cria um nÃ³ e insere os dados*/
 		node = createNode();
 
 		fgets(node->jogador.nome, sizeof(node->jogador.nome), fptr);
@@ -224,9 +219,9 @@ list_t* recolher_dados_jogadores(char *nome_equipa)
 	return lista;
 }
 
-//IO e Semi-Core Permite nos escolher a formação para a equipa
+//IO e Semi-Core Permite nos escolher a formaÃ§Ã£o para a equipa
 void escolher_form(node_eqs *node) {
-	printf("Qual é a formacao que pretende?(Minimo de 1 em cada posicao)\n");
+	printf("Qual Ã© a formacao que pretende?(Minimo de 1 em cada posicao)\n");
 	printf("Quantos defesas, medios e atacantes quer?(Separado por espaco)");
 	scanf("%d", &node->equipa.formacao.numdef);
 	scanf("%d", &node->equipa.formacao.nummed);
@@ -246,7 +241,7 @@ void escolher_form(node_eqs *node) {
 	}
 }
 
-//Permite analisar as strings sem ser casesensitive(Nenhuma funçao em C o permite)
+//Permite analisar as strings sem ser casesensitive(Nenhuma funÃ§ao em C o permite)
 int casesensitive(char *nome, char *nomestr) {
 	char nomes, nomestrs;
 	int i=0;
@@ -283,7 +278,7 @@ node_t * procura_jog(list_t *lista, char *nome) {
 	return (node);
 }
 
-//IO e Semi-core Permite nos mudar a posiçao do jogador escolhido e mudar o parametro pos dele
+//IO e Semi-core Permite nos mudar a posiÃ§ao do jogador escolhido e mudar o parametro pos dele
 void posicao_jog(node_t *node, struct formacao *equipa)
 {
 	static int gr = 0, def = 0, med = 0, atac = 0;
@@ -336,7 +331,7 @@ void posicao_jog(node_t *node, struct formacao *equipa)
 }
 
 
-//IO Função para imprimir os jogadores no ecrã
+//IO FunÃ§Ã£o para imprimir os jogadores no ecrÃ£
 void printjogs(list_t *lista) {
 	node_t *node = lista->head;
 
@@ -365,7 +360,7 @@ void printjogs(list_t *lista) {
 	}
 }
 
-//IO Função para receber o nome do jogador desejado
+//IO FunÃ§Ã£o para receber o nome do jogador desejado
 void perguntjog(char *nome) {
 	printf("Que jogador deseja? ");
 	scanf(" %29[^\n]s", nome);
@@ -384,7 +379,7 @@ void escolher_jogadores(node_eqs *node_eqs)
 		node = procura_jog(node_eqs->equipa.lista, nome);
 
 		while (!node) {
-			printf("Jogador inválido!");
+			printf("Jogador invÃ¡lido!");
 			perguntjog(nome);
 			node = procura_jog(node_eqs->equipa.lista, nome);
 		}
@@ -405,7 +400,7 @@ int mudar_jogadores(node_eqs *node_eqs) {
 }
 
 //----------------------------------------------------------------------
-//Funções de escolha de equipa
+//FunÃ§Ãµes de escolha de equipa
 
 void recolhe_formacao(node_eqs *node_eqs);
 
@@ -424,7 +419,7 @@ int recolher_dados_das_equipas(list_eqs *lista_eqs, int *nr_equipas)
 	}
 
 	while (fgets(c, sizeof(c), fptr)) {
-		/*Cria um nó e insere os dados*/
+		/*Cria um nÃ³ e insere os dados*/
 		node = createNode_eqs();
 
 		fscanf(fptr, " %29[^\n]s", node->equipa.nome);
@@ -437,7 +432,7 @@ int recolher_dados_das_equipas(list_eqs *lista_eqs, int *nr_equipas)
 			return FALSE;
 		node->equipa.pont_geral = le_pont_geral(node);
 		recolhe_formacao(node);
-		/*Insere o nó na lista*/
+		/*Insere o nÃ³ na lista*/
 		insertListTop_eqs(lista_eqs, node);
 		(*nr_equipas)++;
 	}
@@ -557,7 +552,7 @@ int le_pont_geral(node_eqs *equipaA) {
 }
 
 //---------------------------------------------------------
-//Bloco de simulação de jogo
+//Bloco de simulaÃ§Ã£o de jogo
 void registar_resultados(node_eqs *equipaA, node_eqs *equipaB, int resultados, int gA, int gB) {
 	
 	if(resultados == 1){
